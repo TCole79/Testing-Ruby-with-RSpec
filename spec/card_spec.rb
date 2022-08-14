@@ -5,10 +5,14 @@ class Card
   end
 end
 
-RSpec.describe 'Card' do # card class
-  it 'has a type' do
-    # this is exactly the same as using 'it' - specify 'has a type' do
-    card = Card.new('Ace of Spades')
-    expect(card.type).to eq('Ace of Spades')
+RSpec.describe Card do
+  it 'has a rank' do
+    card = Card.new('Ace', 'Spades')
+    expect(card.rank).to eq 'Ace'
+  end
+
+  it 'has a suit' do
+    card = Card.new('Ace', 'Spades')
+    expect(card.suit).to eq 'Spades'
   end
 end
