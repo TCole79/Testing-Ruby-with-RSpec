@@ -7,13 +7,13 @@ class Card
 end
 
 RSpec.describe Card do
-
-  def card # our helper method
-    Card.new('Ace', 'Spades')
-  end
+  let(:card) { Card.new('Queen', 'Spades') } # let method takes a symbol, which is the name of the variable to
+  # be available in the test below
+  # let with no bang operator is lazy loaded when the spec needs it, not before
+  # let! with bang operator loads it into memory at the start of the example
 
   it 'has a rank' do
-    expect(card.rank).to eq('Ace')
+    expect(card.rank).to eq('Queen')
   end
 
   it 'has a suit' do
