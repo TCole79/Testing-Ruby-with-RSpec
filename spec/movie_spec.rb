@@ -40,6 +40,22 @@ class Movie
 end
 
 # example flow
-actor = Actor.new("Bradd Pitt")
-movie = Movie.new(actor)
-movie.start_shooting
+# actor = Actor.new("Bradd Pitt")
+# movie = Movie.new(actor)
+# movie.start_shooting
+
+RSpec.describe Movie do
+  let(:stuntman) { double("Mr. Danger", ready?: true, act: "Any string", fall_off_ladder: "Sure, do it!", light_on_fire: false) }
+  subject { described_class.new(stuntman) }
+
+  describe '#start_shooting_method' do
+    it 'expects an actor to do three actions' do
+      expect(stuntman).to receive(:ready?)
+      expect(stuntman).to receive(:act)
+      expect(stuntman).to receive(:fall_off_ladder)
+      expect(stuntman).to receive(:light_on_fire)
+
+      subject.start_shooting
+    end
+  end
+end
