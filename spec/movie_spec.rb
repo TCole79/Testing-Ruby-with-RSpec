@@ -35,6 +35,7 @@ class Movie
       puts actor.act
       puts actor.fall_off_ladder
       puts actor.light_on_fire
+      actor.act
     end
   end
 end
@@ -50,10 +51,17 @@ RSpec.describe Movie do
 
   describe '#start_shooting_method' do
     it 'expects an actor to do three actions' do
-      expect(stuntman).to receive(:ready?)
-      expect(stuntman).to receive(:act)
-      expect(stuntman).to receive(:fall_off_ladder)
-      expect(stuntman).to receive(:light_on_fire)
+      # expect(stuntman).to receive(:ready?)
+      # expect(stuntman).to receive(:act)
+      # expect(stuntman).to receive(:fall_off_ladder)
+      # expect(stuntman).to receive(:light_on_fire)
+      # expect(stuntman).to recieve(:light_on_fire).once # this is the same as below - can't have both
+      # expect(stuntman).to recieve(:light_on_fire).exactly(1).times # this is the same as above - can't have both
+      expect(stuntman).to receive(:light_on_fire).at_most(1).times
+
+      expect(stuntman).to receive(:act).twice # - these three the same - can only have one
+      # expect(stuntman).to receive(:act).exactly(2).times # - these three the same - can only have one
+      # expect(stuntman).to receive(:act).at_least(2).times # - these three the same - can only have one
 
       subject.start_shooting
     end
